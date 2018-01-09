@@ -20,6 +20,7 @@ global.onboarding = false;
 global.invoiceFileName = "";
 global.basic_price = "";
 
+
 module.exports = {
   selector: require('./selectors'),
   shouldExist: function (err, existing) {

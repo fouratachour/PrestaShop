@@ -10,7 +10,8 @@ scenario('Check order movement', client => {
   }, 'stocks');
   scenario('Check order movement', client => {
     test('should go to "Stocks"', () => client.goToSubtabMenuPage(CatalogPage.menu_button, Stock.submenu));
+
     test('should go to "Movements" tabs', () => client.goToStockMovements(Movement));
-    test('should check the movements of the delivered product" ', () => client.checkMovement(Movement, 1, global.tab["orderQuantity"], "-", "Customer Order"));
+    test('should check the movements of the delivered product', () => client.checkMovement(Movement, 1, global.tab["orderQuantity"], "-", "Customer Order"));
   }, 'stocks');
 }, 'stocks',true);
