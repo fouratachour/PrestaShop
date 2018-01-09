@@ -2,14 +2,30 @@ const {AccessPageBO} = require('../../../selectors/BO/access_page');
 const {CatalogPage} = require('../../../selectors/BO/catalogpage/index');
 const {Stock} = require('../../../selectors/BO/catalogpage/stocksubmenu/stock');
 const {Movement} = require('../../../selectors/BO/catalogpage/stocksubmenu/movements');
-const stock_common_scenarios = require('./stock');
+const {AddProductPage} = require('../../../selectors/BO/add_product_page');
+const common_scenarios = require('../2_product/product');
+
 let promise = Promise.resolve();
+
+productData = [{
+    name: 'FirstProduct',
+    quantity: "100",
+    price: '5',
+    image_name: 'image_test.jpg',
+}, {
+    name: 'SecondProduct',
+    quantity: "100",
+    price: '5',
+    image_name: 'image_test.jpg',
+}];
 
 scenario('Modify quantity and check the movement of a group of product', client => {
     scenario('Login in the Back Office', client => {
         test('should open the browser', () => client.open());
         test('should login successfully in the Back Office', () => client.signInBO(AccessPageBO));
     }, 'stocks');
+    common_scenarios.createProduct(AddProductPage, productData[0]);
+    common_scenarios.createProduct(AddProductPage, productData[1]);
     scenario('Modify quantity and check the movement of a group of product', client => {
         test('should go to "Stocks" page', () => client.goToSubtabMenuPage(CatalogPage.menu_button, Stock.submenu));
         test('should set the "Quantity" of the first product to 15', () => client.modifyProductQuantity(Stock, 1, 15));
@@ -22,6 +38,5 @@ scenario('Modify quantity and check the movement of a group of product', client 
                 .then(() => client.getTextInVar(Movement.time_movement.replace('%P', 2), 'secondMovementDate'))
                 .then(() => client.checkOrderMovement(Movement, client));
         });
-
     }, 'stocks');
 }, 'stocks',true);
