@@ -148,19 +148,12 @@ module.exports = {
     if (client) {
       return client;
     } else {
-      if (typeof saucelabs !== 'undefined' && saucelabs != "None") {
-        client = webdriverio
-          .remote(options2)
-          .init()
-          .windowHandleMaximize()
-      } else {
         client = webdriverio
           .remote(options)
           .windowHandleMaximize()
       }
       initCommands(client);
       return client;
-    }
   },
   getCustomDate: function (numberOfDay) {
     var today = new Date();

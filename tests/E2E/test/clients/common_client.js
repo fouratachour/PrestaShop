@@ -276,6 +276,12 @@ class CommonClient {
       return this.client.pause(1000)
     }
   }
+
+  pause(time){
+    return this.client
+      .pause(time)
+  }
+
 }
 
 module.exports = CommonClient;
