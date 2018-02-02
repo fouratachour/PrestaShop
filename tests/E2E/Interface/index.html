@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Frameset//EN"
+        "http://www.w3.org/TR/REC-html40/frameset.dtd">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+
+</head>
+<body>
+<h1>Hello World!</h1>
+<div  id="test1" style="border:1px solid grey;display: inline-block;width: 50%;">
+
+</div>
+
+<div  id="test" style="border:1px solid red;display: inline-block;width: 50%;float: right;">
+
+</div>
+
+</body>
+
+<script>
+  window.onload = function(){
+    var iframe = document.createElement('iframe');
+    iframe.id = 'iframe';
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+    iframe.src = 'console.txt';
+
+    function change() {
+      setTimeout(function(){
+        var text = document.getElementById('iframe').contentDocument.body.firstChild.innerHTML;
+        document.getElementById('test').innerHTML = text;
+      }, 1000);
+    }
+    change();
+
+    var text = document.getElementById('iframe');
+    text.addEventListener("changed", function() {
+
+      console.log("heelo");
+    });
+
+  }
+</script>
+</html>
