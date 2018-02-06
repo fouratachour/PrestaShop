@@ -5,8 +5,6 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-
-
 </head>
 <body>
 <h1>Hello World!</h1>
@@ -22,11 +20,9 @@
 
 <script>
 
-
-
   function showMessage (message) {
     message.toString();
-    var message = message.replace("should", "<br> should");
+    var message = message.replace(" ", "<br> should");
     document.getElementById('test').innerHTML = message;
   }
 
