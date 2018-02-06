@@ -1,50 +1,51 @@
 var fs = require('fs');
 var i = 0;
 var version = new Array();
-version = [1.7];
-
-var workSpace = process.env.TRAVIS_BUILD_DIR
-
-while (i < 1) {
 
 // Verify the existence of Mocha Reporter
-  if (fs.existsSync(workSpace + '/test/mochawesome-report')) {
-    var cssFile = '';
-    var jsFile = '';
-    var htmlFile = '';
 
-    // concatenate css and js files in a single html file
-    function processFile() {
-      jsFile = "<script type='text/javascript'>" + jsFile + "</script></body>";
-      cssFile = "<style type='text/css'>" + cssFile + "</style>";
+var cssFile = '';
+var jsFile = '';
+var htmlFile = '';
 
-      htmlFile = htmlFile.replace('<link rel="stylesheet" href="assets/app.css"/>', '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">' + cssFile);
-      htmlFile = htmlFile.replace('</body>', jsFile);
-      fs.writeFile("email_sender/test_report_" + version[i] + ".html", htmlFile, function (err) {
+/*// concatenate css and js files in a single html file
+function processFile() {
+  jsFile = "<script type='text/javascript'>" + jsFile + "</script></body>";
+  cssFile = "<style type='text/css'>" + cssFile + "</style>";
 
-        if (err) {
-          return console.log(err);
-        }
+  fs.writeFile("test_report.html", htmlFile, function (err) {
 
-        console.log("The file was saved!");
-      });
-
+    if (err) {
+      return console.log(err);
     }
 
-    // read content of Js file
-    jsFile = fs.readFileSync(workSpace + '/test/mochawesome-report/assets/app.js').toString();
+    console.log("The file was saved!");
+  });}*/
 
-    // read content of CSS file
-    cssFile = fs.readFileSync(workSpace + '/test/mochawesome-report/assets/app.css').toString();
 
-    // read content of Html file
-    htmlFile = fs.readFileSync(workSpace + '/test/mochawesome-report/mochawesome.html').toString();
 
-    processFile();
+// read content of Js file
+jsFile = fs.readFileSync('../mochawesome-report/assets/app.js').toString();
 
-    i++;
-  } else {
-    i++
+// read content of CSS file
+cssFile = fs.readFileSync('../mochawesome-report/assets/app.css').toString();
+
+// read content of Html file
+htmlFile = fs.readFileSync('../mochawesome-report/mochawesome.html').toString();
+
+
+htmlFile = htmlFile.replace('<link rel="stylesheet" href="../mochawesome-report/assets/app.css"/>', '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">' + cssFile);
+htmlFile = htmlFile.replace('</body>', jsFile);
+
+fs.writeFile("test_report.html", htmlFile, function (err) {
+
+  if (err) {
+    return console.log(err);
   }
 
-}
+  console.log("The file was saved!");
+});
+
+
+
+//processFile();

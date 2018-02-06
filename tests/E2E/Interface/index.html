@@ -21,27 +21,30 @@
 </body>
 
 <script>
-  window.onload = function(){
-    var iframe = document.createElement('iframe');
-    iframe.id = 'iframe';
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
-    iframe.src = 'console.txt';
 
-    function change() {
-      setTimeout(function(){
-        var text = document.getElementById('iframe').contentDocument.body.firstChild.innerHTML;
-        document.getElementById('test').innerHTML = text;
-      }, 1000);
-    }
-    change();
 
-    var text = document.getElementById('iframe');
-    text.addEventListener("changed", function() {
 
-      console.log("heelo");
-    });
-
+  function showMessage (message) {
+    message.toString();
+    var message = message.replace("should", "<br> should");
+    document.getElementById('test').innerHTML = message;
   }
+
+  var previous = "";
+  setInterval(function() {
+    var ajax = new XMLHttpRequest();
+    ajax.onreadystatechange = function() {
+      if (ajax.readyState == 4) {
+        if (ajax.responseText != previous) {
+          console.log("file changed!");
+          previous = ajax.responseText;
+          showMessage(previous)
+        }
+      }
+    };
+    ajax.open("POST", "console.txt", true); //Use POST to avoid caching
+    ajax.send();
+  }, 1000);
+
 </script>
 </html>
