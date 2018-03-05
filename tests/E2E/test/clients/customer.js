@@ -7,7 +7,7 @@ class Customer extends CommonClient {
       return this.client
         .waitAndSetValue(selector, customer_email + date_time + '@prestashop.com')
         .keys('\uE007')
-    }else{
+    } else {
       return this.client
         .pause(1000)
     }

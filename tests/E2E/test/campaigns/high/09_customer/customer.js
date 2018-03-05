@@ -39,7 +39,7 @@ module.exports = {
     }, 'customer');
   },
   checkCustomerBO: function (customerData) {
-    scenario('Check the customer creation', client => {
+    scenario('Check the customer creation in the back office', client => {
       test('should check the email existence in the "Customers list"', () => {
         return promise
           .then(() => client.isVisible(Customer.customer_filter_by_email_input))
@@ -49,7 +49,7 @@ module.exports = {
     }, 'customer');
   },
   editCustomer: function (customerEmail, editCustomerData) {
-    scenario('Check the customer creation', client => {
+    scenario('Edit Customer', client => {
       test('should go to the "Customers" page', () => client.goToSubtabMenuPage(Menu.Sell.Customers.customers_menu, Menu.Sell.Customers.customers_submenu));
       test('should search for the customer email in the "Customers list"', () => {
         return promise
@@ -58,11 +58,11 @@ module.exports = {
       });
       test('should click on "Edit" button', () => client.waitForExistAndClick(Customer.edit_button));
       test('should choose the "Social title" radio', () => client.waitForExistAndClick(Customer.social_title_button));
-      test('should set the "First name" input', () => client.waitAndSetValue(Customer.first_name_input, editCustomerData.first_name));
-      test('should set the "Last name" input', () => client.waitAndSetValue(Customer.last_name_input, editCustomerData.last_name));
-      test('should set the "Email" input', () => client.waitAndSetValue(Customer.email_address_input, editCustomerData.email_address + date_time + '@prestashop.com'));
-      test('should set the "Password" input', () => client.waitAndSetValue(Customer.password_input, editCustomerData.password));
-      test('should set the customer "Birthday"', () => {
+      test('should set the new "First name" input', () => client.waitAndSetValue(Customer.first_name_input, editCustomerData.first_name));
+      test('should set the new "Last name" input', () => client.waitAndSetValue(Customer.last_name_input, editCustomerData.last_name));
+      test('should set the new "Email" input', () => client.waitAndSetValue(Customer.email_address_input, editCustomerData.email_address + date_time + '@prestashop.com'));
+      test('should set the new "Password" input', () => client.waitAndSetValue(Customer.password_input, editCustomerData.password));
+      test('should set the new customer "Birthday"', () => {
         return promise
           .then(() => client.waitAndSelectByValue(Customer.days_select, editCustomerData.birthday.day))
           .then(() => client.waitAndSelectByValue(Customer.month_select, editCustomerData.birthday.month))
@@ -74,21 +74,38 @@ module.exports = {
   },
   deleteCustomer: function (customerEmail) {
     scenario('Delete customer', client => {
-    test('should go to the "Customers" page', () => client.goToSubtabMenuPage(Menu.Sell.Customers.customers_menu, Menu.Sell.Customers.customers_submenu));
-    test('should search for the customer email in the "Customers list"', () => {
-      return promise
-        .then(() => client.isVisible(Customer.customer_filter_by_email_input))
-        .then(() => client.EmailSearch(Customer.customer_filter_by_email_input, customerEmail))
-    });
-    test('should click on "Delete" button', () => {
-      return promise
-        .then(() => client.waitForExistAndClick(Customer.dropdown_toggle))
-        .then(() => client.waitForExistAndClick(Customer.delete_button))
-    });
-    test('should accepts the currently displayed alert dialog', () => client.alertAccept());
-    test('should choose the option that allows customers to register again with the same email address', () => client.waitForExistAndClick(Customer.delete_first_option));
-    test('should click on "Delete" button', () => client.waitForExistAndClick(Customer.delete_confirmation_button));
+      test('should go to the "Customers" page', () => client.goToSubtabMenuPage(Menu.Sell.Customers.customers_menu, Menu.Sell.Customers.customers_submenu));
+      test('should search for the customer email in the "Customers list"', () => {
+        return promise
+          .then(() => client.isVisible(Customer.customer_filter_by_email_input))
+          .then(() => client.EmailSearch(Customer.customer_filter_by_email_input, customerEmail))
+      });
+      test('should click on "Delete" button', () => {
+        return promise
+          .then(() => client.waitForExistAndClick(Customer.dropdown_toggle))
+          .then(() => client.waitForExistAndClick(Customer.delete_button))
+      });
+      test('should accepts the currently displayed alert dialog', () => client.alertAccept());
+      test('should choose the option that allows customers to register again with the same email address', () => client.waitForExistAndClick(Customer.delete_first_option));
+      test('should click on "Delete" button', () => client.waitForExistAndClick(Customer.delete_confirmation_button));
       test('should verify the appearance of the green validation', () => client.checkTextValue(BO.success_panel, '×\nSuccessful deletion.'));
+    }, 'customer');
+  },
+  deleteCustomerWithBulkActions: function (customerEmail) {
+    scenario('Delete customer with bulk actions', client => {
+      test('should go to the "Customers" page', () => client.goToSubtabMenuPage(Menu.Sell.Customers.customers_menu, Menu.Sell.Customers.customers_submenu));
+      test('should search for the customer email in the "Customers list"', () => {
+        return promise
+          .then(() => client.isVisible(Customer.customer_filter_by_email_input))
+          .then(() => client.EmailSearch(Customer.customer_filter_by_email_input, customerEmail))
+      });
+      test('should select the searched client', () => client.waitForExistAndClick(Customer.select_customer));
+      test('should click on the "Bulk actions" button', () => client.waitForExistAndClick(Customer.bulk_actions_button));
+      test('should click on the "Delete selected" button', () => client.waitForExistAndClick(Customer.bulk_actions_delete_button));
+      test('should accepts the currently displayed alert dialog', () => client.alertAccept());
+      test('should choose the option that allows customers to register again with the same email address', () => client.waitForExistAndClick(Customer.delete_first_option));
+      test('should click on "Delete" button', () => client.waitForExistAndClick(Customer.delete_confirmation_button));
+      test('should verify the appearance of the green validation', () => client.checkTextValue(BO.success_panel, '×\nThe selection has been successfully deleted.'));
     }, 'customer');
   }
 };
