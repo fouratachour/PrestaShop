@@ -350,7 +350,7 @@ class CommonClient {
    * @param content
    * @returns {*}
    */
-  setContentToEditor(selector, content) {
+  setTextToEditor(selector, content) {
     return this.client
       .click(selector)
       .execute(function (content) {
