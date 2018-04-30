@@ -38,6 +38,7 @@
     "window": "^1.0"
   },
   "devDependencies": {
+    "async": "^2.6.0",
     "chai": "^4.1.2",
     "chai-string": "^1.4.0",
     "dateformat": "^2.0.0",
@@ -45,9 +46,13 @@
     "gulp-cli": "^2.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.6.1",
+    "image-diff": "^2.0.0",
+    "looks-same": "^3.3.0",
     "mochawesome": "^2.3.0",
+    "node-resemble-js": "^0.2.0",
     "nodemailer": "^4.0.1",
     "pdf-to-text": "0.0.6",
-    "pdfkit": "^0.8.3"
+    "pdfkit": "^0.8.3",
+    "resemblejs": "^2.10.1"
   }
 }

@@ -4,6 +4,12 @@ let path = require('path');
 let fs = require('fs');
 let pdfUtil = require('pdf-to-text');
 
+
+let looksSame = require('looks-same');
+let imageDiff = require('image-diff');
+let compare = require('resemblejs').compare;
+
+
 global.tab = [];
 
 class CommonClient {
@@ -68,8 +74,8 @@ class CommonClient {
       });
   }
 
-  takeScreenshot() {
-    return this.client.saveScreenshot(`test/screenshots/${this.client.desiredCapabilities.browserName}_exception_${new Date().getTime()}.png`);
+  takeScreenshot(name = `${this.client.desiredCapabilities.browserName}_exception_${new Date().getTime()}.png`) {
+    return this.client.saveScreenshot('test/screenshots/' + name);
   }
 
   changeLanguage(language) {
@@ -445,6 +451,52 @@ class CommonClient {
         document.getElementById(selector).style.display = 'none';
       }, selector);
   }
+
+  //Look same
+  checkImageLookSame(image1, image2) {
+    looksSame('test/screenshots/' + image1, 'test/screenshots/' + image2, function (error, equal) {
+      //equal will be true, if images looks the same
+      global.imageVar = equal
+    });
+    return this.client
+      .pause(2000)
+      .then(() => expect(global.imageVar).to.be.true);
+  }
+
+  //ImageDiff
+  checkImageimagdiff(image1, image2) {
+    imageDiff({
+      actualImage: 'test/screenshots/' + image1,
+      expectedImage: 'test/screenshots/' + image2,
+      diffImage: 'imageDiffOutPut.png',
+    }, function (err, imagesAreSame) {
+      // error will be any errors that occurred
+      // imagesAreSame is a boolean whether the images were the same or not
+      // diffImage will have an image which highlights differences
+      global.imageVar = imagesAreSame
+    });
+
+    return this.client
+      .pause(8000)
+      .then(() => expect(global.imageVar).to.be.true);
+  }
+
+  //Resemble JS
+  checkImageResemble(image1, image2) {
+    compare('test/screenshots/' + image1, 'test/screenshots/' + image2, function (err, data) {
+      fs.writeFile('./resembleOutput.png', data.getBuffer());
+      if (data.misMatchPercentage === '0.00') {
+        global.imageVar = true;
+      } else {
+        global.imageVar = false;
+      }
+    });
+
+   return this.client
+      .pause(8000)
+      .then(() => expect(global.imageVar).to.be.true);
+  }
+
 }
 
 module.exports = CommonClient;
