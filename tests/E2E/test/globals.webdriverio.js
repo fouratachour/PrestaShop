@@ -19,10 +19,12 @@ global.module_tech_name = argv.MODULE || "gadwords";
 global.install_shop = argv.INSTALL || false;
 global.downloadsFolderPath = argv.DIR;                   // Download directory
 global.UrlLastStableVersion = argv.URLLASTSTABLEVERSION; // URL of last stable version of prestashop
+global.gui = argv.GUI || "compare"; //takescreenshot to take a screenshot and compare to compare the visual appearance with the existing screenshot
+global.oldurl = argv.OLDURL || "localhost";
 
-global.rcLink = argv.RCLINK  || "" ; // Link for download The RC
-global.rcTarget = argv.RCTARGET    ; // Last stable version location directory
-global.filename = argv.FILENAME  || ""  ; // RC file name
+global.rcLink = argv.RCLINK || ""; // Link for download The RC
+global.rcTarget = argv.RCTARGET; // Last stable version location directory
+global.filename = argv.FILENAME || ""; // RC file name
 
 global.headless = argv.HEADLESS || false;
 
@@ -38,9 +40,9 @@ global.basic_price = "";
 global.indexText = 0;
 global.categoryID = "";
 module.exports = {
-    selector: require('./selectors'),
-    shouldExist: function (err, existing) {
-        should(err).be.not.defined;
-        should(existing).be.true;
-    }
+  selector: require('./selectors'),
+  shouldExist: function (err, existing) {
+    should(err).be.not.defined;
+    should(existing).be.true;
+  }
 };

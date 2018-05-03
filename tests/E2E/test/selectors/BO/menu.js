@@ -1,5 +1,7 @@
 module.exports = {
   Menu: {
+    loader:'//*[@id="ajax_running"]',
+    symfony_loader:'//*[@id="header_infos"]/button',
     dashboard_menu: '//*[@id="tab-AdminDashboard"]/a',
     Sell: {
       Orders: {

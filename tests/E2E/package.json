@@ -48,6 +48,7 @@
     "mochawesome": "^2.3.0",
     "nodemailer": "^4.0.1",
     "pdf-to-text": "0.0.6",
-    "pdfkit": "^0.8.3"
+    "pdfkit": "^0.8.3",
+    "resemblejs": "^2.10.1"
   }
 }
