@@ -98,7 +98,7 @@ function initCommands(client) {
       .waitAndSetValue(selector.login_input, login)
       .waitAndSetValue(selector.password_inputBO, password)
       .waitForExistAndClick(selector.login_buttonBO)
-      .waitForExist(selector.menuBO, 120000);
+     // .waitForExist(selector.menuBO, 120000);
   });
 
   client.addCommand('accessToBO', function (selector, link = URL) {

@@ -3,6 +3,7 @@ const {selector} = require('../globals.webdriverio.js');
 let path = require('path');
 let fs = require('fs');
 let pdfUtil = require('pdf-to-text');
+let compare = require('resemblejs').compare;
 
 global.tab = [];
 global.isOpen = false;
@@ -56,8 +57,9 @@ class CommonClient {
             .waitForExistAndClick(menuSelector, 2000)
             .pause(2000)
             .waitForVisibleAndClick(selector);
-        }})
-      .then(()=> this.client.pause(4000));
+        }
+      })
+      .then(() => this.client.pause(4000));
   }
 
   closeBoarding(selector) {
@@ -79,8 +81,8 @@ class CommonClient {
       });
   }
 
-  takeScreenshot() {
-    return this.client.saveScreenshot(`test/screenshots/${this.client.desiredCapabilities.browserName}_exception_${new Date().getTime()}.png`);
+  takeScreenshot(name = `${this.client.desiredCapabilities.browserName}_exception_${new Date().getTime()}.png`) {
+    return this.client.saveScreenshot('test/screenshots/' + name);
   }
 
   changeLanguage(language) {
@@ -454,6 +456,32 @@ class CommonClient {
       .execute(function (selector) {
         document.getElementById(selector).style.display = 'none';
       }, selector);
+  }
+
+  waitUntilIsNotVisible(selector) {
+    this.client.waitUntil(function () {
+      return this.client.isVisible(selector) === false
+    }, 10000, 'expected loader to hide after 10s');
+  }
+
+  checkImageResemble(image1, image2, name) {
+    compare('test/screenshots/' + image1, 'test/screenshots/' + image2, function (err, data) {
+      if (err) {
+        global.imageVar = false;
+      } else {
+        if (data.misMatchPercentage === '0.00') {
+          global.imageVar = true;
+        } else {
+          fs.writeFile('test/screenshots/' + name + ' erreur.png', data.getBuffer(), (error) => {
+          });
+          global.imageVar = false;
+        }
+      }
+    });
+
+    return this.client
+      .pause(0)
+      .then(() => expect(global.imageVar).to.be.true);
   }
 
 }
