@@ -119,7 +119,7 @@ npm run high-test -- --URL=FrontOfficeURL --DIR=DownloadDirectory --MODULE=DataT
 * **URL**: **(Optional)** Front office URL of your PrestaShop website without the “http://” (default to **localhost**)
 * **DIR**: **(Required)** Your download directory (exp: /home/toto/Downloads/) so we can check the downloaded invoice.
 * **MODULE**: **(Optional)** Module technical name to install (default to "gadwords")
-* **GUI**:**(Optional)** set it to **takescreenshot** if you want to change the existing screen shot of the interface and  **compare** to compare the visual appearance with the existing screenshot
+* **COMPAREVERSION**: **(Optional)** the screenshot version with which you want to compare the screenshot of the current version
 
 >Notes:
 >
@@ -134,7 +134,7 @@ npm run full-test -- --URL=FrontOfficeURL --DIR=DownloadDirectory --MODULE=DataT
 * **URL**: **(Optional)** Front office URL of your PrestaShop website without the “http://” (default to **localhost**)
 * **DIR**: **(Required)** Your download directory (exp: /home/toto/Downloads/) so we can check the downloaded invoice.
 * **MODULE**: **(Optional)** Module technical name to install (default to "gadwords")
-* **GUI**:**(Optional)** set it to **takescreenshot** if you want to change the existing screen shot of the interface and  **compare** to compare the visual appearance with the existing screenshot
+* **COMPAREVERSION**: **(Optional)** the screenshot version with which you want to compare the screenshot of the current version
 
 >Notes:
 >

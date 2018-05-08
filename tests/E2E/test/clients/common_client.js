@@ -4,9 +4,11 @@ let path = require('path');
 let fs = require('fs');
 let pdfUtil = require('pdf-to-text');
 let compare = require('resemblejs').compare;
+const exec = require('child_process').exec;
 
 global.tab = [];
 global.isOpen = false;
+global.screenshotVersionsNumber = [];
 
 class CommonClient {
   constructor() {
@@ -81,8 +83,8 @@ class CommonClient {
       });
   }
 
-  takeScreenshot(name = `${this.client.desiredCapabilities.browserName}_exception_${new Date().getTime()}.png`) {
-    return this.client.saveScreenshot('test/screenshots/' + name);
+  takeScreenshot() {
+    return this.client.saveScreenshot(`test/screenshots/${this.client.desiredCapabilities.browserName}_exception_${new Date().getTime()}.png`);
   }
 
   changeLanguage(language) {
@@ -472,18 +474,61 @@ class CommonClient {
         if (data.misMatchPercentage === '0.00') {
           global.imageVar = true;
         } else {
-          fs.writeFile('test/screenshots/' + name + ' erreur.png', data.getBuffer(), (error) => {
+          fs.writeFile('test/screenshots/' + name + ' error.png', data.getBuffer(), (error) => {
           });
           global.imageVar = false;
         }
       }
     });
-
     return this.client
-      .pause(0)
-      .then(() => expect(global.imageVar).to.be.true);
+      .pause(1000)
+      .then(() => expect(global.imageVar, 'the two interface version are not the same').to.be.true);
   }
 
+  getTheShopVersion() {
+    fs.readFile(`../../install-dev/install_version.php`, 'utf8', (err, content) => {
+      if (err) throw err;
+      global.version = ((content.substring(content.indexOf("define('_PS_INSTALL_VERSION_', '"), content.indexOf("');")).split(", '"))[1]);
+    });
+    return this.client
+      .pause(2000)
+  }
+
+  createNewGuiVersionFolder() {
+    if (!fs.existsSync('test/screenshots/GUI_' + global.version)) {
+      fs.mkdirSync('test/screenshots/GUI_' + global.version);
+    }
+    return this.client
+      .pause(2000)
+  }
+
+  getThelastArchivedVersion() {
+    const child = exec('cd test/screenshots && ls | tail -n 2 | head -n1',
+      (error, stdout, stderr) => {
+        global.compareVersion = stdout.replace("\n", "").replace("GUI_", '');
+      });
+    return this.client
+      .pause(3000)
+  }
+
+  wholePageScreenshot(name) {
+    return this.client
+      .saveDocumentScreenshot('test/screenshots/' + name)
+  }
+
+  deleteExtraVersion() {
+    const child = exec('cd test/screenshots && ls | tail',
+      (error, stdout, stderr) => {
+        global.screenshotVersionsNumber = stdout.split("\n");
+        if (global.screenshotVersionsNumber.length - 1 > 3) {
+          exec('cd test/screenshots && rm -r ' + global.screenshotVersionNumber[0],
+            (error, stdout, stderr) => {
+            });
+        }
+      });
+    return this.client
+      .pause(2000)
+  }
 }
 
 module.exports = CommonClient;

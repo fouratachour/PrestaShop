@@ -8,6 +8,6 @@ scenario('Open all menu links in the Back Office', () => {
     test('should login successfully in the Back Office', () => client.signInBO(AccessPageBO));
   }, 'common_client');
 
-  common.openAllMenuLinkBO('');
+  common.openAllMenuLinkBO();
 
-}, 'common_client');
+}, 'common_client', true);

@@ -89,7 +89,7 @@ module.exports = {
         general_submenu: '//*[@id="subtab-AdminParentPreferences"]/a',
         maintenance_tab: '//a[text() = "Maintenance"]',
         order_settings_submenu: '//*[@id="subtab-AdminParentOrderPreferences"]/a',
-        statuses_tab: '//*[@id="main"]//div[@class="page-head-tabs"]/a[text()="Statuses"]',
+        statuses_tab: '//*[@id="head_tabs"]//a[text()="Statuses"]',
         product_settings_submenu: '//*[@id="subtab-AdminPPreferences"]/a',
         customer_settings_submenu: '//*[@id="subtab-AdminParentCustomerPreferences"]/a',
         groups_tab: '//*[@id="head_tabs"]/a[text()="Groups"]',
