@@ -478,10 +478,26 @@ class CommonClient {
         }
       }
     });
-
     return this.client
-      .pause(0)
+      .pause(2000)
       .then(() => expect(global.imageVar).to.be.true);
+  }
+
+  getTheShopVersion() {
+    fs.readFile(`../../install-dev/install_version.php`, 'utf8', (err, content) => {
+      if (err) throw err;
+      global.version = ((content.substring(content.indexOf("define('_PS_INSTALL_VERSION_', '"), content.indexOf("');")).split(", '"))[1]);
+    });
+    return this.client
+      .pause(2000)
+  }
+
+  createNewGuiVersionFolder() {
+    if (!fs.existsSync('test/screenshots/GUI_' + global.version)) {
+      fs.mkdirSync('test/screenshots/GUI_' + global.version);
+    }
+    return this.client
+      .pause(2000)
   }
 
 }

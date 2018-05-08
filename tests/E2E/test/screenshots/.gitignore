@@ -1,4 +1,4 @@
 */
 !.gitignore
-!/GUI
+!/GUI*
 /*.png
