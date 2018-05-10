@@ -33,12 +33,12 @@ module.exports = {
             }
           })
       });
-      test('should take Screen shot of ' + describe1 + ' ' + describe2 + ' page and compare with the previous version', () => {
+      test('should take Screenshot of ' + describe1 + ' ' + describe2 + ' page and compare with the '+ global.compareVersion +' version', () => {
         return promise
           .then(() => client.waitUntilIsNotVisible(Menu.loader))
           .then(() => client.waitUntilIsNotVisible(Menu.symfony_loader))
           .then(() => client.takeScreenshot('GUI_' + global.version + '/' + describe1 + ' ' + describe2 + '.png'))
-          .then(() => client.checkImageResemble('GUI_' + global.version + '/' + describe1 + ' ' + describe2 + '.png', 'GUI_' + global.compareVersion + '/' + describe1 + ' ' + describe2 + '.png', describe1));
+          .then(() => client.checkImageResemble('GUI_' + global.version + '/' + describe1 + ' ' + describe2 + '.png', 'GUI_' + global.compareVersion + '/' + describe1 + ' ' + describe2 + '.png', describe1+' '+describe2));
       });
     }
   },
@@ -144,7 +144,7 @@ module.exports = {
       this.clickOnMenuLinksAndCheckElement(client, gui, "", Menu.dashboard_menu, PagesForm.calendar_form, "Dashboard");
     }, 'common_client');
     scenario('Check all the menu links of "SELL"', () => {
-      scenario('Check all the menu links of "Orders" in the Back Office', client => {
+/*      scenario('Check all the menu links of "Orders" in the Back Office', client => {
         this.clickOnMenuLinksAndCheckElement(client, gui, Menu.Sell.Orders.orders_menu, Menu.Sell.Orders.orders_submenu, PagesForm.Orders.order_form, "Orders");
         this.clickOnMenuLinksAndCheckElement(client, gui, Menu.Sell.Orders.orders_menu, Menu.Sell.Orders.invoices_submenu, PagesForm.Orders.invoice_form, "Invoices");
         this.clickOnMenuLinksAndCheckElement(client, gui, Menu.Sell.Orders.orders_menu, Menu.Sell.Orders.credit_slips_submenu, PagesForm.Orders.order_slip_form, "Credit slips");
@@ -164,7 +164,7 @@ module.exports = {
         this.clickOnMenuLinksAndCheckElement(client, gui, Menu.Sell.Catalog.catalog_menu, Menu.Sell.Catalog.discounts_submenu, PagesForm.Catalog.cart_price_rule_form, "Discounts", "Carte Price Rules", 0, Menu.Sell.Catalog.catalog_price_rules_tab);
         this.clickOnMenuLinksAndCheckElement(client, gui, Menu.Sell.Catalog.catalog_menu, Menu.Sell.Catalog.stocks_submenu, PagesForm.Catalog.search_box, "Stocks", "Stock", 4000);
         this.clickOnMenuLinksAndCheckElement(client, gui, Menu.Sell.Catalog.catalog_menu, Menu.Sell.Catalog.stocks_submenu, PagesForm.Catalog.search_box, "Stocks", "Movements", 0, Menu.Sell.Catalog.movement_tab);
-      }, 'common_client');
+      }, 'common_client');*/
 /*      scenario('Check all the menu links of "Customers" in the Back Office', client => {
         this.clickOnMenuLinksAndCheckElement(client, gui, Menu.Sell.Customers.customers_menu, Menu.Sell.Customers.customers_submenu, PagesForm.Customers.customer_form, "Customers");
         this.clickOnMenuLinksAndCheckElement(client, gui, Menu.Sell.Customers.customers_menu, Menu.Sell.Customers.addresses_submenu, PagesForm.Customers.address_form, "Addresses");

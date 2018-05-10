@@ -19,7 +19,7 @@ global.module_tech_name = argv.MODULE || "gadwords";
 global.install_shop = argv.INSTALL || false;
 global.downloadsFolderPath = argv.DIR;                   // Download directory
 global.UrlLastStableVersion = argv.URLLASTSTABLEVERSION; // URL of last stable version of prestashop
-global.compareVersion = argv.COMPAREVERSION || "localhost";
+global.compareVersion = argv.COMPAREVERSION || "";
 
 global.rcLink = argv.RCLINK || ""; // Link for download The RC
 global.rcTarget = argv.RCTARGET; // Last stable version location directory

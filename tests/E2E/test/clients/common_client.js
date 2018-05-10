@@ -4,6 +4,7 @@ let path = require('path');
 let fs = require('fs');
 let pdfUtil = require('pdf-to-text');
 let compare = require('resemblejs').compare;
+const exec = require('child_process').exec;
 
 global.tab = [];
 global.isOpen = false;
@@ -472,15 +473,15 @@ class CommonClient {
         if (data.misMatchPercentage === '0.00') {
           global.imageVar = true;
         } else {
-          fs.writeFile('test/screenshots/' + name + ' erreur.png', data.getBuffer(), (error) => {
+          fs.writeFile('test/screenshots/' + name + ' error.png', data.getBuffer(), (error) => {
           });
           global.imageVar = false;
         }
       }
     });
     return this.client
-      .pause(2000)
-      .then(() => expect(global.imageVar).to.be.true);
+      .pause(3000)
+      .then(() => expect(global.imageVar, 'the two interface version are not the same').to.be.true);
   }
 
   getTheShopVersion() {
@@ -498,6 +499,15 @@ class CommonClient {
     }
     return this.client
       .pause(2000)
+  }
+
+  getThelastArchivedVersion(){
+    const child = exec('cd test/screenshots && ls | tail -n 2 | head -n1' ,
+      (error, stdout, stderr) => {
+        global.compareVersion = stdout.replace("\n","").replace("GUI_",'');
+      });
+    return this.client
+      .pause(3000)
   }
 
 }

@@ -3,8 +3,6 @@ const {Installation} = require('../../selectors/BO/installation');
 const {OnBoarding} = require('../../selectors/BO/onboarding.js');
 const common_shop_parameters = require('../common_scenarios/shop_parameters');
 const common_installation = require('../common_scenarios/common_installation');
-const {Menu} = require('../../selectors/BO/menu');
-const {PagesForm} = require('../../selectors/BO/pages_form.js');
 
 scenario('Open all menu links in the Back Office', () => {
   scenario('Open the browser', client => {
@@ -30,11 +28,13 @@ scenario('Open all menu links in the Back Office', () => {
   scenario('Login in the Back Office, get the shop version and create GUI version folder', client => {
     test('should get the shop version', () => client.getTheShopVersion());
     test('should create new GUI folder of the current version', () => client.createNewGuiVersionFolder());
+    if (global.compareVersion === "") {
+      test('should get the last archived version', () => client.getThelastArchivedVersion());
+    }
     test('should login successfully in the Back Office', () => client.signInBO(AccessPageBO));
   }, 'common_client');
   common_shop_parameters.openAllMenuLinkBO('takescreenshot');
   scenario('Logout from the Back Office', client => {
     test('should logout successfully from Back Office', () => client.signOutBO());
   }, 'common_client');
-
 }, 'common_client', true);
