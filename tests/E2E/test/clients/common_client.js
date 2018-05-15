@@ -510,6 +510,17 @@ class CommonClient {
       .pause(3000)
   }
 
+  takescreenshot() {
+    return this.client
+      .saveDocumentScreenshot('fullscreenshot.png')
+      .saveElementScreenshot('selectorscreenshot.png','//*[@id="calendar"]')
+      .saveViewportScreenshot('screenshot.png')
+  }
+
+  compare() {
+    return this.client
+      .checkDocument('fullscreenshot.png','selectorscreenshot.png')
+  }
 }
 
 module.exports = CommonClient;

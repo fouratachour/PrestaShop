@@ -2,6 +2,7 @@
 
 let client;
 let webdriverio = require('webdriverio');
+const webdriverioScreenshot = require('wdio-screenshot');
 let globals = require('./globals.webdriverio.js');
 
 let options = {
@@ -179,6 +180,7 @@ module.exports = {
         };
       }
       client = webdriverio.remote(options);
+      webdriverioScreenshot.init(client);
       initCommands(client);
       return client;
     }

@@ -3,7 +3,8 @@ const {Installation} = require('../../selectors/BO/installation');
 const {OnBoarding} = require('../../selectors/BO/onboarding.js');
 const common_shop_parameters = require('../common_scenarios/shop_parameters');
 const common_installation = require('../common_scenarios/common_installation');
-
+const {Menu} = require('../../selectors/BO/menu');
+let promise = Promise.resolve();
 scenario('Open all menu links in the Back Office', () => {
   scenario('Open the browser', client => {
     test('should open the browser', () => client.open());
@@ -26,15 +27,21 @@ scenario('Open all menu links in the Back Office', () => {
   }
 
   scenario('Login in the Back Office, get the shop version and create GUI version folder', client => {
-    test('should get the shop version', () => client.getTheShopVersion());
+/*    test('should get the shop version', () => client.getTheShopVersion());
     test('should create new GUI folder of the current version', () => client.createNewGuiVersionFolder());
     if (global.compareVersion === "") {
       test('should get the last archived version', () => client.getThelastArchivedVersion());
-    }
+    }*/
     test('should login successfully in the Back Office', () => client.signInBO(AccessPageBO));
+    test('should take Screenshot of page and compare with the '+ global.compareVersion +' version', () => {
+      return promise
+        .then(() => client.pause(3000))
+        .then(() => client.takescreenshot())
+       // .then(() => client.compare())
+ });
   }, 'common_client');
-  common_shop_parameters.openAllMenuLinkBO('takescreenshot');
+/*  common_shop_parameters.openAllMenuLinkBO('takescreenshot');
   scenario('Logout from the Back Office', client => {
     test('should logout successfully from Back Office', () => client.signOutBO());
-  }, 'common_client');
+  }, 'common_client');*/
 }, 'common_client', true);
