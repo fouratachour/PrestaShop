@@ -19,16 +19,16 @@ class Category extends CommonClient {
         return this.client
           .waitForExistAndClick(groupActionSelector)
           .waitForExistAndClick(actionSelector)
-          .alertAccept()
+          .alertAccept();
       } else {
         return this.client
           .waitForExistAndClick(groupActionSelector)
-          .waitForExistAndClick(actionSelector)
+          .waitForExistAndClick(actionSelector);
       }
     } else {
       return this.client
         .pause(2000)
-        .waitForExistAndClick(actionSelector)
+        .waitForExistAndClick(actionSelector);
     }
   }
 
@@ -71,6 +71,16 @@ class Category extends CommonClient {
       .then((breadcrumb) => {
         expect(breadcrumb.value).to.contains("Home", parentCategory, categoryName)
       })
+  }
+
+  getCategoriesPageNumber(selector) {
+    return this.client
+      .execute(function (selector) {
+        return document.getElementById(selector).getElementsByTagName("tbody")[0].children.length;
+      }, selector)
+      .then((count) => {
+        global.categoriesPageNumber = count.value;
+      });
   }
 }
 

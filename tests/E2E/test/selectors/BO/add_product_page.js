@@ -205,7 +205,11 @@ module.exports = {
     continue_confirmation: '//*[@id="confirmation_modal"]//button[2]',
     search_categories: '//*[@id="ps-select-product-category"]',
     list_categories: '//*[@id="ui-id-1"]/li',
-    default_category: '//*[@id="ps_categoryTags"]/span[1]/a'
+    default_category: '//*[@id="ps_categoryTags"]/span[1]/a',
+    expand_categories_button: '//*[@id="categories"]//div[@class="categories-tree-actions js-categories-tree-actions"]/span[contains(@data-action,"expand")]/i',
+    selected_category: '//*[@id="form_step1_categories"]/ul[@class="category-tree"]/li[2]/ul/li[2]/div[@class="checkbox"]/label/input[1]',
+    accessories_category: '//*[@id="choice_tree"]/ul/li/ul/li[2]/div/label/input',
+    accessories_category_label: '//*[@id="form_step1_categories"]/ul[@class="category-tree"]/li[2]/ul/li[2]/div[@class="checkbox"]/label'
   },
 
   ProductList: {
@@ -228,6 +232,13 @@ module.exports = {
     pagination_previous: '//*[@id="product_catalog_list"]//li[@class="page-item previous "]//a',
     page_active_number: '//*[@id="product_catalog_list"]//li[@class="page-item active"]//input',
     item_per_page: '//*[@id="paginator_select_page_limit"]',
+    category_list: '//*[@id="product_catalog_list"]/div[2]/div/table/tbody/tr[%ID]/td[5]',
+    category: '//*[@id="choice_tree"]/ul/li/ul/li[%ID]/div/label',
+    subCat: '//*[@id="choice_tree"]/ul[@class="category-tree"]//ul/li[%I]/ul/li[%J]//label[@class="category-label"]',
+    categories_filters: '//*[@id="product_catalog_list"]//table/tbody/tr[%ID]/td[6]',
+    product_name_link: '//*[@id="product_catalog_list"]//table/tbody/tr[%ID]/td[4]/a',
+    filter_by_catrgory_button: '//*[@id="product_catalog_category_tree_filter"]/button',
+    expand_filter_button: '//*[@id="product_catalog_category_tree_filter_expand"]',
     product_category: '//*[@id="product_catalog_list"]//div//tr[%I]/td[6]',
     reset_button: '//*[@id="product_catalog_list"]//tr[2]/th[9]/button[@name="products_filter_reset"]'
   }

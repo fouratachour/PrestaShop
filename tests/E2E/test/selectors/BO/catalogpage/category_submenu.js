@@ -22,7 +22,6 @@ module.exports = {
     update_button: '//*[@id="table-category"]//td[7]/div/div',
     action_button: '//*[@id="table-category"]//td[7]//button[contains(@class, "dropdown-toggle")]',
     delete_button: '//*[@id="table-category"]//td[7]//a[@title="Delete"]',
-    view_button: '//*[@id="table-category"]//td[7]//a[@title="View"]',
     image_link: '//*[@id="image-images-thumbnails"]/div/img',
     thumb_link: '//*[@id="thumb-images-thumbnails"]/div/img',
     second_delete_button: '//*[@id="content"]//form//button[not(@name)]',
@@ -38,6 +37,10 @@ module.exports = {
     mode_delete_radio: '//*[@id="deleteMode_delete"]',
     expand_all_button: '//*[@id="expand-all-categories-tree"]',
     parent_category: '(//*[@id="categories-tree"]//span[contains(.,"%NAME")]//input)[1]',
-    search_no_results: '//*[@id="table-category"]//td[@class="list-empty"]'
+    search_no_results: '//*[@id="table-category"]//td[@class="list-empty"]',
+    category_name: '//*[@id="table-category"]//tr[%ID]//td[3]',
+    category_action_button: '//*[@id="table-category"]//tr[%ID]//td[7]//a[contains(@title, "View")]',
+    sub_category_name: '//form[@action="index.php?controller=AdminCategories&id_category=3&token=706ad704a266cf07d4196b31a9c86d1b#category"]//table[@id="table-category"]//tr[%ID]//td[3]',
+    view_button: '//*[@id="table-category"]//tr[%ID]//td[7]//a[@title="View"]'
   }
 };
