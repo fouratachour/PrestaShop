@@ -13,7 +13,7 @@ module.exports = {
     pack_product_price: '//*[@id="add-to-cart-or-refresh"]//article[%P]//div[@class="pack-product-price"]',
     pack_product_quantity: '//*[@id="add-to-cart-or-refresh"]//article[%P]//div[@class="pack-product-quantity"]',
     product_size: '//*[@id="group_1"]',
-    product_color: '(//*[@id="group_3"]//span)[2]',
+    product_color: '(//*[@id="group_2"]//span)[2]',
     see_all_products: '//*[@id="content"]//a[contains(@class, "all-product-link")]',
     first_product_all: '(//*[@id="js-product-list"]//article//a)[1]',
     pagination_next: '//*[@id="js-product-list"]//a[contains(@class, "next")]',
@@ -31,6 +31,6 @@ module.exports = {
     product_detail_tab: '//*[@role="tablist"]//li[2]',
     attachments_tab: '//*[@id="main"]//div[@class="product-information"]//a[@aria-controls="attachments"]',
     filename_link: '(//*[@id="attachments"]//a)[1]',
-    second_product: '(//*[@id="content"]//h3[@itemprop="name"])[2]'
+    product_tab_list: '//*[@role="tablist"]//li[%I]',
   }
 };
