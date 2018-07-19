@@ -9,7 +9,13 @@ class ModifyQuantity extends CommonClient {
       .waitForExistAndClick(Menu.Sell.Catalog.movement_tab)
       .waitForExist(Movement.variation, 90000)
       .pause(1000)
-      .waitForExistAndClick(Movement.sort_data_time_icon, 2000);
+      .isVisible(Movement.sort_data_time_icon, 2000)
+      .then(() => {
+        if (global.isVisible) {
+          this.client.waitForVisibleAndClick(Movement.sort_data_time_icon);
+        }
+        this.client.pause();
+      });
   }
 
   modifyProductQuantity(Stock, order, quantity) {

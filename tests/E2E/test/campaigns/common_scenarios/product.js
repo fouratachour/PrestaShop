@@ -219,7 +219,6 @@ module.exports = {
     test('should check that the page value in the URL is equal to "' + pageNumber + '"', () => client.checkParamFromURL('page', pageNumber));
   },
 
-
   checkPaginationBO(nextOrPrevious, pageNumber, itemPerPage, close = false, paginateBetweenPages = false) {
     scenario('Navigate between catalog pages and set the paginate limit equal to "' + itemPerPage + '"', client => {
       let selectorButton = nextOrPrevious === 'Next' ? ProductList.pagination_next : ProductList.pagination_previous;

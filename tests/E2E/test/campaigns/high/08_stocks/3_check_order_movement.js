@@ -1,6 +1,4 @@
 const {AccessPageBO} = require('../../../selectors/BO/access_page');
-const {CatalogPage} = require('../../../selectors/BO/catalogpage/index');
-const {Stock} = require('../../../selectors/BO/catalogpage/stocksubmenu/stock');
 const {Movement} = require('../../../selectors/BO/catalogpage/stocksubmenu/movements');
 const {OrderPage} = require('../../../selectors/BO/order');
 const {CreateOrder} = require('../../../selectors/BO/order');
