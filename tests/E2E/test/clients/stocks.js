@@ -34,16 +34,6 @@ class ModifyQuantity extends CommonClient {
       .then((text) => expect(text.indexOf(type)).to.not.equal(-1))
   }
 
-  changeOrderState(selector, state) {
-    return this.client
-      .waitForExist(selector.order_state_select, 90000)
-      .execute(function () {
-        document.querySelector('#id_order_state').style = "";
-      })
-      .selectByVisibleText(selector.order_state_select, state)
-      .waitForExistAndClick(selector.update_status_button)
-  }
-
   checkOrderMovement(Movement, client) {
     if (global.tab['firstMovementDate'] === global.tab['secondMovementDate']) {
       promise = client.checkMovement(Movement, 1, "15", "+", "Employee Edition");

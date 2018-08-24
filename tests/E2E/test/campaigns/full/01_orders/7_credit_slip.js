@@ -4,17 +4,11 @@ const {AccessPageFO} = require('../../../selectors/FO/access_page');
 const {MerchandiseReturns} = require('../../../selectors/BO/Merchandise_returns');
 
 const {OrderPage} = require('../../../selectors/BO/order');
+const {CreditSlip} = require('../../../selectors/BO/order');
 const commonOrder = require('../../common_scenarios/order');
 
 global.orderInformation = [];
-
-const {AddProductPage} = require('../../../selectors/BO/add_product_page');
-const {CustomerSettings} = require('../../../selectors/BO/shopParameters/customer_settings');
-const {SearchProductPage} = require('../../../selectors/FO/search_product_page');
-const {productPage} = require('../../../selectors/FO/product_page');
-const {CheckoutOrderPage} = require('../../../selectors/FO/order_page');
-
-
+let promise = Promise.resolve();
 
 scenario('Check Credit slip', () => {
   scenario('Open the browser login successfully in the Back Office ', client => {
@@ -34,14 +28,14 @@ scenario('Check Credit slip', () => {
     commonOrder.createOrderFO();
     scenario('Generate a credit slip', client => {
       test('should login successfully in the Back Office', () => client.linkAccess(URL + '/admin-dev'));
-      test('should go orders list', () => client.goToSubtabMenuPage(Menu.Sell.Orders.orders_menu, Menu.Sell.Orders.orders_submenu));
-      test('should go the created order', () => client.waitForExistAndClick(OrderPage.order_view_button.replace('%ORDERNumber', 1)));
+      test('should go to the orders list', () => client.goToSubtabMenuPage(Menu.Sell.Orders.orders_menu, Menu.Sell.Orders.orders_submenu));
+      test('should go to the created order', () => client.waitForExistAndClick(OrderPage.order_view_button.replace('%ORDERNumber', 1)));
       test('should change order state to "Payment accepted"', () => client.changeOrderState(OrderPage, 'Payment accepted'));
-      test('should click on "Standard refund" button', () => client.waitForExistAndClick(OrderPage.standard_refund));
-      test('should click on "Refund" CheckBox', () => client.waitForExistAndClick(OrderPage.refund_checkbox));
-      test('should check the "Generate a credit slip" CheckBox', () => client.waitForExistAndClick(OrderPage.generate_credit_slip_checkbox));
-      test('should click on "Refund products" button', () => client.waitForExistAndClick(OrderPage.refund_products_button));
-      test('should check the success message', () => client.checkTextValue(OrderPage.success_msg, 'The discount was successfully generated.', 'contain'));
+      test('should click on "Partial refund" button', () => client.waitForExistAndClick(OrderPage.partial_refund));
+      test('should set the "quantity refund" to "2"', () => client.waitAndSetValue(OrderPage.quantity_refund, '2'));
+      test('should click on "Re-stock products" CheckBox', () => client.waitForExistAndClick(OrderPage.re_stock_product));
+      test('should click on "Partial refund" button', () => client.waitForExistAndClick(OrderPage.refund_products_button));
+      test('should check the success message', () => client.checkTextValue(OrderPage.success_msg, 'partial refund was successfully created.', 'contain'));
       test('should get all order information', () => {
         return promise
           .then(() => client.getTextInVar(OrderPage.order_id, "OrderID"))
@@ -67,7 +61,7 @@ scenario('Check Credit slip', () => {
           .then(() => client.getTextInVar(OrderPage.total_price_tax_included, "Price"))
           .then(() => {
             global.orderInformation[0] = {
-              "OrderId": global.tab['OrderID'],
+              "OrderId": global.tab['OrderID'].replace("#", ''),
               "invoiceDate": global.tab['invoiceDate'],
               "ProductRef": global.tab['ProductRef'],
               "ProductCombination": global.tab['ProductCombination'],
@@ -78,8 +72,28 @@ scenario('Check Credit slip', () => {
             }
           });
       });
-
-
+      test('should click on "DOCUMENTS" subtab', () => client.waitForVisibleAndClick(OrderPage.document_submenu));
+      test('should get the credit slip name', () => client.getDocumentName(OrderPage.credit_slip_document_name));
+      test('should go to "Credit slip" page', () => client.goToSubtabMenuPage(Menu.Sell.Orders.orders_menu, Menu.Sell.Orders.credit_slips_submenu));
+      test('should click on "Download credit slip" button', () => {
+        return promise
+          .then(() => client.waitForVisibleAndClick(CreditSlip.download_btn.replace('%ID', global.tab['OrderID'].replace("#", ''))))
+          .then(() => client.pause(5000));
+      });
+      test('should check the "Billing Address " ', () => {
+        return promise
+          .then(() => client.checkDocument(global.downloadsFolderPath, global.invoiceFileName, 'My Company'))
+          .then(() => client.checkDocument(global.downloadsFolderPath, global.invoiceFileName, '16, Main street'))
+          .then(() => client.checkDocument(global.downloadsFolderPath, global.invoiceFileName, '75002 Paris'))
+          .then(() => client.checkDocument(global.downloadsFolderPath, global.invoiceFileName, 'France'));
+      });
+      test('should check the "Invoice date Reference" ', () => client.checkDocument(global.downloadsFolderPath, global.invoiceFileName, global.orderInformation[0].invoiceDate));
+      test('should check the "Invoice Reference" ', () => client.checkDocument(global.downloadsFolderPath, global.invoiceFileName, global.orderInformation[0].ProductRef));
+      test('should check the "Product combination" ', () => client.checkDocument(global.downloadsFolderPath, global.invoiceFileName, global.orderInformation[0].ProductCombination));
+      test('should check the "Product quantity" ', () => client.checkDocument(global.downloadsFolderPath, global.invoiceFileName, global.orderInformation[0].ProductQuantity));
+      test('should check the "Product name" ', () => client.checkDocument(global.downloadsFolderPath, global.invoiceFileName, global.orderInformation[0].ProductName));
+      test('should check the "Unit Price" ', () => client.checkDocument(global.downloadsFolderPath, global.invoiceFileName, global.orderInformation[0].UnitPrice));
+      test('should check the "Price" ', () => client.checkDocument(global.downloadsFolderPath, global.invoiceFileName, global.orderInformation[0].Price));
     }, 'order');
   }, 'order');
 

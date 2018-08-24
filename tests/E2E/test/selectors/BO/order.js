@@ -20,9 +20,7 @@ module.exports = {
     download_delivery_button: '//*[@id="documents_table"]//tr[3]/td[3]/a',
     product_name: '//*[@id="orderProducts"]//tr[%NUMBER]//span[@class="productName"]',
     total_price: '//*[@id="total_products"]/td[contains(@class,"amount")]',
-
     total_price_tax_included: '//*[@id="orderProducts"]//td[@class="total_product"]',
-
     shipping_method: '//*[@id="shipping_table"]//tr/td[3]',
     search_by_reference_input: '//*[@id="form-order"]//table[contains(@class,"order")]//input[@name="orderFilter_reference"]',
     search_order_button: '//*[@id="submitFilterButtonorder"]',
@@ -35,11 +33,13 @@ module.exports = {
     total_order: '//*[@id="total_order"]/td[@class="amount text-right nowrap"]/strong',
     total_product_price: '//*[@id="orderProducts"]//tr[%NUMBER]/td[6]',
     order_view_button: '//*[@id="form-order"]//table//tbody//tr[%ORDERNumber]//td[12]//a',
-    standard_refund:'//*[@id="desc-order-standard_refund"]',
-    refund_checkbox:'//*[@id="orderProducts"]/tbody/tr[1]/td[9]/input[@type="checkbox"]',
-    generate_credit_slip_checkbox:'//label[@for="generateCreditSlip"]',
-    refund_products_button:'//input[@name="cancelProduct"]',
-    success_msg:'(//*[@id="main"]//div[contains(@class,"alert-success")])[1]',
+    partial_refund: '//*[@id="desc-order-partial_refund"]',
+
+    re_stock_product: '//label[@for="reinjectQuantitiesRefund"]',
+
+    generate_credit_slip_checkbox: '//label[@for="generateCreditSlip"]',
+    refund_products_button: '//button[@name="partialRefund"]',
+    success_msg: '(//*[@id="main"]//div[contains(@class,"alert-success")])[1]',
     order_date: '(//*[@id="content"]//div[@class="kpi-content"])[1]/span[2]',
     order_ref: '(//*[@id="content"]//span[@class="badge"])[1]',
     product_information: '//*[@id="orderProducts"]/tbody/tr[1]/td[2]/a',
@@ -58,7 +58,9 @@ module.exports = {
     total_tax: '//*[@id="total_taxes"]/td[2]',
     carrier: '//*[@id="shipping_table"]/tbody/tr/td[3]',
     payment_method: '//*[@id="formAddPayment"]/div/table/tbody/tr[1]/td[2]',
-    order_id:'(//*[@id="content"]//span[@class="badge"])[2]'
+    order_id: '(//*[@id="content"]//span[@class="badge"])[2]',
+    credit_slip_document_name: '//*[@id="documents_table"]//tr[3]//a',
+    quantity_refund:'//*[@id="orderProducts"]//div[@class="input-group"]/input[@onchange="checkPartialRefundProductQuantity(this)"]'
   },
 
   CreateOrder: {
@@ -102,5 +104,9 @@ module.exports = {
     customer_online: '//*[@id="table-cart"]//tr[%NUMBER]/td[8]',
     id_shopping_carts: 'table-cart',
     reset_button: '//*[@name="submitResetcart"]'
+  },
+
+  CreditSlip:{
+    download_btn:'//*[@id="table-order_slip"]/tbody//td[contains(text(),"%ID")]/..//a'
   }
 };
