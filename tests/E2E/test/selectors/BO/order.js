@@ -20,6 +20,9 @@ module.exports = {
     download_delivery_button: '//*[@id="documents_table"]//tr[3]/td[3]/a',
     product_name: '//*[@id="orderProducts"]//tr[%NUMBER]//span[@class="productName"]',
     total_price: '//*[@id="total_products"]/td[contains(@class,"amount")]',
+
+    total_price_tax_included: '//*[@id="orderProducts"]//td[@class="total_product"]',
+
     shipping_method: '//*[@id="shipping_table"]//tr/td[3]',
     search_by_reference_input: '//*[@id="form-order"]//table[contains(@class,"order")]//input[@name="orderFilter_reference"]',
     search_order_button: '//*[@id="submitFilterButtonorder"]',
@@ -30,7 +33,32 @@ module.exports = {
     delete_button: '(//*[@id="table-cart"]//a[@class="delete"])[1]',
     stock_product: '//*[@id="orderProducts"]//tr[%NUMBER]/td[5]',
     total_order: '//*[@id="total_order"]/td[@class="amount text-right nowrap"]/strong',
-    total_product_price: '//*[@id="orderProducts"]//tr[%NUMBER]/td[6]'
+    total_product_price: '//*[@id="orderProducts"]//tr[%NUMBER]/td[6]',
+    order_view_button: '//*[@id="form-order"]//table//tbody//tr[%ORDERNumber]//td[12]//a',
+    standard_refund:'//*[@id="desc-order-standard_refund"]',
+    refund_checkbox:'//*[@id="orderProducts"]/tbody/tr[1]/td[9]/input[@type="checkbox"]',
+    generate_credit_slip_checkbox:'//label[@for="generateCreditSlip"]',
+    refund_products_button:'//input[@name="cancelProduct"]',
+    success_msg:'(//*[@id="main"]//div[contains(@class,"alert-success")])[1]',
+    order_date: '(//*[@id="content"]//div[@class="kpi-content"])[1]/span[2]',
+    order_ref: '(//*[@id="content"]//span[@class="badge"])[1]',
+    product_information: '//*[@id="orderProducts"]/tbody/tr[1]/td[2]/a',
+    empty_page_logo: '//*[@id="documents_table"]//div[@class="list-empty-msg"]',
+    pdf_icon: '//*[@id="table-order"]/tbody/tr[%ORDER]//td[11]//i',
+    invoice_document: '//table//td[3]/a',
+    product_quantity: '//*[@id="orderProducts"]//span[contains(@class,"product_quantity_show")]',
+    product_name_tab: '//*[@id="orderProducts"]//span[contains(@class,"productName")]',
+    product_unit_price: '//*[@id="orderProducts"]//input[@name="product_price_tax_excl"]',
+    product_unit_price_tax_included: '//*[@id="orderProducts"]//span[@class="product_price_show"]',
+    product_price: '//*[@id="orderProducts"]//input[@name="product_price_tax_incl"]',
+    total_order_price: '//*[@id="total_order"]/td[2]/strong',
+    total_product: '//*[@id="total_products"]/td[2]',
+    shipping_cost_price: '//*[@id="total_shipping"]/td[2]',
+    total: '//*[@id="total_order"]/td[2]/strong',
+    total_tax: '//*[@id="total_taxes"]/td[2]',
+    carrier: '//*[@id="shipping_table"]/tbody/tr/td[3]',
+    payment_method: '//*[@id="formAddPayment"]/div/table/tbody/tr[1]/td[2]',
+    order_id:'(//*[@id="content"]//span[@class="badge"])[2]'
   },
 
   CreateOrder: {

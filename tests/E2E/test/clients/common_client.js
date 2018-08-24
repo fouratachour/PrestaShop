@@ -486,6 +486,13 @@ class CommonClient {
       });
   }
 
+  displayHiddenBlock(selector) {
+    return this.client
+      .execute(function (selector) {
+        document.getElementsByClassName(selector).style = '';
+      })
+  }
+
 }
 
 module.exports = CommonClient;
