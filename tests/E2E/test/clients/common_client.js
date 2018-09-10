@@ -496,6 +496,12 @@ class CommonClient {
         global.param[param] = current_url.split(param + '=')[1].split("&")[0];
       });
   }
+
+  checkVatInTable(selector){
+    return this.client.getText(selector).then(function (text) {
+      expect(global.productList).to.be.an('array').that.includes(text)
+    });
+  }
 }
 
 module.exports = CommonClient;

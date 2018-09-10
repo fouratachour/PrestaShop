@@ -240,13 +240,6 @@ class Product extends CommonClient {
       });
   }
 
-  checkProductCategory(i) {
-    return this.client
-      .scrollWaitForExistAndClick(ProductList.product_name_link.replace("%ID", global.positionTable[i - 1], 50000))
-      .waitForVisible(AddProductPage.product_name_input)
-      .scrollWaitForExistAndClick(AddProductPage.expand_categories_button)
-  }
-
   getSubCategoryNumber(i) {
     return this.client
       .execute(function (i) {
