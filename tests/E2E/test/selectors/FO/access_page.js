@@ -27,8 +27,8 @@ module.exports = {
     second_footer_block: '//*[@id="footer"]//div[@class="col-md-6 wrapper"][2]/p',
     footer_block_link_widget: '//*[@class="footer-container"]//p[contains(text(),"%FOOTERBLOCKNAME")]',
     footer_block_second_link_widget: '//*[@class="footer-container"]//div[@class="col-md-6 wrapper"][2]/p',
-    display_before_footer_linkwidget:'//*[@id="footer"]/div[1]/div/div[3]/div//p[contains(text(),"%NAME")]',
-    display_before_footer_second_linkwidget:'//*[@id="footer"]/div[1]/div/div[3]/div/div[2]/p',
+    display_before_footer_linkwidget: '//*[@id="footer"]/div[1]/div/div[3]/div//p[contains(text(),"%NAME")]',
+    display_before_footer_second_linkwidget: '//*[@id="footer"]/div[1]/div/div[3]/div/div[2]/p',
     home_link_widget: '//*[@id="content"]/div[3]/div//p[contains(text(),"%HOMELINKWIDGET")]',
     second_home_link_widget: '//*[@id="content"]/div[3]//div[2]//p',
     display_nav1_link_widget: '//*[@id="header"]/nav/div/div/div[1]/div[1]/div[2]/div//p[contains(text(),"%NAVLINKWIDGET")]',
@@ -44,10 +44,16 @@ module.exports = {
     second_shopping_cart_link_widget: '(//*[@class="card cart-summary"]//div[contains(@class,"links")]//p)[2]',
     nav_shopping_cart_footer_link_widget: '//div[contains(@class,"cart-grid-body")]//p[contains(text(),"%NAVSHOPPINGCARTFOOTERLINKWIDGET")]',
     second_nav_shopping_cart_footer_link_widget: '//div[contains(@class,"cart-grid-body")]//div[2]/p',
-    display_top_link_widget:'//*[@id="header"]/div[2]/div/div[1]/div[2]/div[3]/div//p[contains(text(),"%DISPLAYTOP")]',
-    second_display_top_link_widget:'//*[@id="header"]/div[2]/div/div[1]/div[2]/div[3]/div/div[2]/p',
+    display_top_link_widget: '//*[@id="header"]/div[2]/div/div[1]/div[2]/div[3]/div//p[contains(text(),"%DISPLAYTOP")]',
+    second_display_top_link_widget: '//*[@id="header"]/div[2]/div/div[1]/div[2]/div[3]/div/div[2]/p',
     not_found_error_message: '//*[@id="main"]//h1',
     product_name: '//*[@id="js-product-list"]//h2//a[contains(text(),"%PAGENAME")]',
-    personal_info: '//*[@id="footer_account_list"]//a[@title="Personal info"]'
+    personal_info: '//*[@id="footer_account_list"]//a[@title="Personal info"]',
+    site_map_button: '//a[contains(text(),"Sitemap")]',
+    created_brand: '//a[contains(text(),"%NAME")]',
+    brand_list_button: '//*[@id="manufacturer-page"]',
+    brand_short_description: '//*[@id="manufacturer-short_description"]/p',
+    brand_description: '//*[@id="manufacturer-description"]/p',
+    brand_product:'//*[@id="js-product-list"]//a[contains(text(),"%NAME")]'
   }
 };

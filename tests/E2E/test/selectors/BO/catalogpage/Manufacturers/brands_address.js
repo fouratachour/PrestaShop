@@ -11,6 +11,6 @@ module.exports = {
     country: '//*[@id="id_country"]',
     phone_input: '//*[@id="phone"]',
     other_input: '//*[@id="other"]',
-    save_button: '//*[@id="address_form_submit_btn"]'
+    save_button: '//*[@id="address_form_submit_btn"]',
   }
 };

@@ -50,6 +50,7 @@ module.exports = {
     product_add_brand_btn: '//*[@id="add_brand_button"]',
     product_brand_select: '//*[@id="manufacturer-content"]/div/div[1]/fieldset/span',
     product_brand_select_option: '//*[@id="select2-form_step1_id_manufacturer-results"]/li[2]',
+    product_brand_param_option: '//*[@id="select2-form_step1_id_manufacturer-results"]/li[contains(text(),"%NAME")]',
     search_product_pack: '//*[@id="form_step1_inputPackItems"]',
     product_item_pack: '//*[@id="js_form_step1_inputPackItems"]/div/div[1]/span/div/div/div[1]/table/tbody/tr[1]',
     product_pack_item_quantity: '//*[@id="form_step1_inputPackItems-curPackItemQty"]',

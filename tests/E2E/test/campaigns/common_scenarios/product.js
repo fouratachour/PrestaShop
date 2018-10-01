@@ -39,6 +39,9 @@ global.productVariations = [];
  *  },
  *  options: {
  *      filename: "attached_filename"
+ *  },
+ *  brand: {
+ *    brandName: "brand name"
  *  }
  * };
  */
@@ -66,6 +69,17 @@ module.exports = {
         scenario('Add the created product to pack', client => {
           test('should select the "Pack of products"', () => client.waitAndSelectByValue(AddProductPage.product_type, 1));
           test('should add products to the pack', () => client.addPackProduct(productData['product']['name'] + date_time, productData['product']['quantity']));
+        }, 'product/product');
+      }
+
+      if (productData.hasOwnProperty('brand')) {
+        scenario('Add the brand to the product', client => {
+          test('should click on "ADD A BRAND"', () => client.scrollWaitForExistAndClick(AddProductPage.product_add_brand_btn, 50));
+          test('should select brand', () => {
+            return promise
+              .then(() => client.waitForExistAndClick(AddProductPage.product_brand_select))
+              .then(() => client.waitForExistAndClick(AddProductPage.product_brand_param_option.replace('%NAME', productData['brand']['brandName']+date_time)));
+          });
         }, 'product/product');
       }
 
