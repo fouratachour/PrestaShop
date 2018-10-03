@@ -14,7 +14,7 @@ module.exports = {
     search_button: '//*[@id="submitFilterButtonmanufacturer"]',
     search_result: '//*[@id="table-manufacturer"]//tr/td[4]',
     address_result: '//*[@id="table-manufacturer"]//tr/td[5]',
-    reset_search: '//*[@id="table-manufacturer"]/thead/tr[2]/th[8]/span/button[2]',
+    reset_search: '//*[@id="table-manufacturer"]//button[@name="submitResetmanufacturer"]',
     dropdown_btn: '//*[@id="table-manufacturer"]//button[@data-toggle="dropdown"]',
     edit_btn: '//*[@id="table-manufacturer"]//a[@class="edit"]',
     delete_btn: '//*[@id="table-manufacturer"]//a[@class="delete"]'

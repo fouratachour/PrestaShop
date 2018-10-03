@@ -12,5 +12,12 @@ module.exports = {
     phone_input: '//*[@id="phone"]',
     other_input: '//*[@id="other"]',
     save_button: '//*[@id="address_form_submit_btn"]',
+    brand_address_filter_input: '//input[@name= "addressFilter_m!name"]',
+    search_button: '//*[@id="submitFilterButtonaddress"]',
+    dropdown_address: '//*[@id="table-address"]//button[@data-toggle="dropdown"]',
+    edit_btn: '//*[@id="table-address"]//a[@title="Edit"]',
+    delete_btn: '//*[@id="table-address"]//a[@class="delete"]',
+    city_column: '//*[@id="table-address"]/tbody//td[7]',
+    reset_search: '//*[@id="table-address"]//button[@name="submitResetaddress"]',
   }
 };
