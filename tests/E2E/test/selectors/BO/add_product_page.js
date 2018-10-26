@@ -93,6 +93,7 @@ module.exports = {
     product_combinations: '//*[@id="show_variations_selector"]/div[2]/label/input',
     combination_size_s: '//*[@id="attribute-group-1"]//label[@for="attribute-1"]',
     combination_size_m: '//*[@id="attribute-group-1"]//label[@for="attribute-2"]',
+    combination_size_l: '//*[@id="attribute-group-1"]//label[@for="attribute-3"]',
     combination_color: '//*[@id="attribute-group-2"]//label[@for="attribute-%ID"]',
     combination_dimension: '//*[@id="attribute-group-3"]//label[@for="attribute-%ID"]',
     combination_color_beige: '//*[@id="attribute-group-2"]//label[@for="attribute-7"]',
@@ -227,7 +228,8 @@ module.exports = {
     product_pack_items: '//*[@id="form_step1_inputPackItems-data"]',
     add_products_to_pack: '//*[@id="js_form_step1_inputPackItems"]/div',
     attribute_group_name: '//*[@id="attributes-list"]//a[text()[contains(.,"%NAME")]]',
-    attribute_value_checkbox: '//*[@id="attribute-group-%ID"]/div/div[%S]//label'
+    attribute_value_checkbox: '//*[@id="attribute-group-%ID"]/div/div[%S]//label',
+    combination_quantity_input: '//*[@id="accordion_combinations"]//td[contains(text(), "%TEXT")]//following-sibling::td[contains(@class, "quantity")]//input',
   },
   ProductList: {
     product_id: '//*[@id="product_catalog_list"]//tr[%ID]/td[2]/label',

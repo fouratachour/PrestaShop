@@ -97,6 +97,24 @@ class Order extends CommonClient {
       .then((text) => expect(text).to.be.false);
   }
 
+  getOrdersNumber(selector) {
+    return this.client
+      .execute(function (selector) {
+        let count = document.getElementById(selector).getElementsByTagName("tbody")[0].children.length;
+        return count;
+      }, selector)
+      .then((count) => {
+        global.ordersNumber = count.value;
+      });
+  }
+
+  checkPrice(selector, price){
+    return this.client
+      .pause(1000)
+      .then(() => this.client.getText(selector))
+      .then((variable) =>expect(parseFloat(variable).toFixed(1)).to.be.equal(price));
+  }
+
 }
 
 module.exports = Order;

@@ -61,5 +61,12 @@ module.exports = {
     modal_content: '//*[@id="blockcart-modal"]//div[@class="modal-content"]',
     cart_page: '//*[@id="cart"]',
     cart_body: '(//*[@id="main"]//div[contains(@class, "body")])[1]'
+  },
+
+  OrderHistory: {
+    order_reference: '//*[@id="content"]//tr[%NUMBER]/th[@scope="row"]',
+    order_Informations: '//*[@id="content"]//tr[1]/td[%NUMBER]',
+    details_button: '//*[@id="content"]//tr[%NUMBER]/td[6]/a[1]',
+    order_details: '(//*[@id="order-infos"]/div[1]/div/div[1]/strong)'
   }
 };

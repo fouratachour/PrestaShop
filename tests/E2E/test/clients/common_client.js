@@ -206,8 +206,9 @@ class CommonClient {
     }
   }
 
-  getAttributeInVar(selector, attribute, globalVar, timeout = 90000) {
+  getAttributeInVar(selector, attribute, globalVar, pause = 0, timeout = 90000) {
     return this.client
+      .pause(pause)
       .waitForExist(selector, timeout)
       .then(() => this.client.getAttribute(selector, attribute))
       .then((variable) => global.tab[globalVar] = variable);
@@ -332,7 +333,7 @@ class CommonClient {
    * @returns {*}
    */
   checkFile(folderPath, fileName, pause = 0) {
-    fs.stat(folderPath + fileName, function(err, stats) {
+    fs.stat(folderPath + fileName, function (err, stats) {
       err === null && stats.isFile() ? global.existingFile = true : global.existingFile = false;
     });
 
@@ -358,8 +359,8 @@ class CommonClient {
     return this.client.waitAndSelectByAttribute(selector, attribute, value, pause, timeout);
   }
 
-  switchWindow(id) {
-    return this.client.switchWindow(id);
+  switchWindow(id, refresh = true, pause = 0) {
+    return this.client.switchWindow(id, refresh, pause);
   }
 
   switchTab(id) {
@@ -592,6 +593,23 @@ class CommonClient {
     }
   }
 
+  switchToFrameById(id, pause = 0) {
+    return this.client
+      .pause(pause)
+      .frame(id);
+  }
+
+  clearElementAndSetValue(selector, value, pause = 0, timeout = 90000) {
+    return this.client
+      .pause(pause)
+      .clearElementAndSetValue(selector, value, timeout);
+  }
+
+  waitForExistAndMiddleClick(selector, pause = 0, timeout = 90000) {
+    return this.client
+      .pause(pause)
+      .waitForExistAndMiddleClick(selector, timeout);
+  }
 }
 
 module.exports = CommonClient;
